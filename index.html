@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    .images__img{
+        width: 200px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 250px;
+    }
+    .images__img2_size{
+        height: 190px;
+    }
+    </style>
+    <div class="images">
+     <img src="img/photo1.png" alt="img1" class="images__img">
+     <img src="img/photo2.png" alt="img2" class="images__img images__img2_size">
+     <img src="img/photo3.png" alt="img3" class="images__img">
+    </div>
+    <script >
+    onload = function () {
+    var img = document.querySelectorAll('.images__img');
+    img[0].style.display = 'none';
+    img[1].style.display = 'none';
+    img[2].style.display = 'none';
+    function getImage(url) {
+        return new Promise(function (resolve, reject) {
+            var img = new Image()
+            img.onload = function () {
+                resolve(url)
+            }
+            img.onerror = function () {
+                reject(url)
+            }
+            img.src = url
+        })
+    };
+    getImage('img/photo1.png').then(function (successUrl) {
+        setTimeout(function() {
+            console.log(successUrl);
+            img[0].style.display = 'block';
+        }, 500)
+    }).catch(function (errorUrl) {
+        console.error(errorUrl + ' ошибка  при загрузки первие фото');
+    })
+    getImage('img/photo2.png').then(function (successUrl) {
+        setTimeout(function() {
+            img[1].style.display = 'block';
+            console.log(successUrl);
+        }, 1000)
+    }).catch(function (errorUrl) {
+        console.error(errorUrl + ' ошибка  при загрузки второй фото');
+    })
+    getImage('img/photo3.png').then(function (successUrl) {
+        setTimeout(function() {
+            img[2].style.display = 'block';
+            console.log(successUrl);
+        }, 1500)
+    }).catch(function (errorUrl) {
+        console.error(errorUrl + ' ошибка  при загрузки третое фото');
+    })
+   
+}
+    </script>
+</body>
+</html>
+ 
