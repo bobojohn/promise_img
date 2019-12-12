@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    <!-- CSS -->
     <style>
     .images__img{
         width: 200px;
@@ -18,11 +20,15 @@
         height: 190px;
     }
     </style>
+
+    <!-- HTML -->
     <div class="images">
      <img src="img/photo1.png" alt="img1" class="images__img">
      <img src="img/photo2.png" alt="img2" class="images__img images__img2_size">
      <img src="img/photo3.png" alt="img3" class="images__img">
     </div>
+
+        <!-- JS -->
     <script >
     onload = function () {
     var img = document.querySelectorAll('.images__img');
@@ -41,30 +47,53 @@
             img.src = url
         })
     };
-    getImage('img/photo1.png').then(function (successUrl) {
-        setTimeout(function() {
-            console.log(successUrl);
-            img[0].style.display = 'block';
-        }, 500)
-    }).catch(function (errorUrl) {
-        console.error(errorUrl + ' ошибка  при загрузки первие фото');
-    })
-    getImage('img/photo2.png').then(function (successUrl) {
-        setTimeout(function() {
-            img[1].style.display = 'block';
-            console.log(successUrl);
-        }, 1000)
-    }).catch(function (errorUrl) {
-        console.error(errorUrl + ' ошибка  при загрузки второй фото');
-    })
-    getImage('img/photo3.png').then(function (successUrl) {
-        setTimeout(function() {
-            img[2].style.display = 'block';
-            console.log(successUrl);
-        }, 1500)
-    }).catch(function (errorUrl) {
-        console.error(errorUrl + ' ошибка  при загрузки третое фото');
-    })
+async function bob(){
+    try{
+    await getImage('img/photo1.png')
+    img[0].style.display = 'block';
+    await getImage('img/photo2.png')
+    img[1].style.display = 'block';
+    getImage('img/photo3.png')
+    img[2].style.display = 'block';
+} catch (errorUrl){
+    console.log('catch' + errorUrl)
+}
+
+}
+bob()
+
+// bob().then((res)=>{
+//     console.log(res)
+// })
+
+
+
+
+
+    // // getImage('img/photo1.png').then(function (successUrl) {
+    // //     setTimeout(function() {
+    // //         console.log(successUrl);
+    // //         img[0].style.display = 'block';
+    // //     }, 500)
+    // }).catch(function (errorUrl) {
+    //     console.error(errorUrl + ' ошибка  при загрузки первие фото');
+    // })
+    // getImage('img/photo2.png').then(function (successUrl) {
+    //     setTimeout(function() {
+    //         img[1].style.display = 'block';
+    //         console.log(successUrl);
+    //     }, 1000)
+    // }).catch(function (errorUrl) {
+    //     console.error(errorUrl + ' ошибка  при загрузки второй фото');
+    // })
+    // getImage('img/photo3.png').then(function (successUrl) {
+    //     setTimeout(function() {
+    //         img[2].style.display = 'block';
+    //         console.log(successUrl);
+    //     }, 1500)
+    // }).catch(function (errorUrl) {
+    //     console.error(errorUrl + ' ошибка  при загрузки третое фото');
+    // })
    
 }
     </script>
